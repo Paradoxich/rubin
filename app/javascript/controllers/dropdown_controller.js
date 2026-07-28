@@ -6,6 +6,7 @@ export default class extends Controller {
 
   connect() {
     this.boundClose = this.closeOnOutsideClick.bind(this)
+    this.boundEscape = this.closeOnEscape.bind(this)
   }
 
   toggle(event) {
@@ -17,20 +18,30 @@ export default class extends Controller {
     this.menuTarget.hidden = false
     this.buttonTarget.setAttribute("aria-expanded", "true")
     document.addEventListener("click", this.boundClose)
+    document.addEventListener("keydown", this.boundEscape)
   }
 
   close() {
     this.menuTarget.hidden = true
     this.buttonTarget.setAttribute("aria-expanded", "false")
     document.removeEventListener("click", this.boundClose)
+    document.removeEventListener("keydown", this.boundEscape)
   }
 
   closeOnOutsideClick(event) {
     if (!this.element.contains(event.target)) this.close()
   }
 
+  closeOnEscape(event) {
+    if (event.key !== "Escape") return
+
+    this.close()
+    this.buttonTarget.focus()
+  }
+
   disconnect() {
     document.removeEventListener("click", this.boundClose)
+    document.removeEventListener("keydown", this.boundEscape)
   }
 
   get isOpen() {
