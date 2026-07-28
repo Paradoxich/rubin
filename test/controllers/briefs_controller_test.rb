@@ -26,14 +26,21 @@ class BriefsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".brief-row__title", text: @brief.title, count: 0
   end
 
-  test "index shows five briefs by default with a link to the rest" do
-    7.times { |i| Brief.create!(title: "Backlog #{i}", requester: "Sam Reyes") }
+  test "index caps long lists at twenty briefs with a link to the rest" do
+    25.times { |i| Brief.create!(title: "Backlog #{i}", requester: "Sam Reyes") }
 
     get briefs_url
-    assert_select ".brief-row", count: 5
+    assert_select ".brief-row", count: 20
     assert_select ".brief-list__more", text: "Show all #{Brief.count}"
 
     get briefs_url(all: 1)
+    assert_select ".brief-row", count: Brief.count
+    assert_select ".brief-list__more", count: 0
+  end
+
+  test "index shows short lists in full without a show-all link" do
+    get briefs_url
+
     assert_select ".brief-row", count: Brief.count
     assert_select ".brief-list__more", count: 0
   end

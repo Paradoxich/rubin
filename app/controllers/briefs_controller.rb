@@ -1,5 +1,5 @@
 class BriefsController < ApplicationController
-  DEFAULT_LIMIT = 5
+  DEFAULT_LIMIT = 20
 
   before_action :set_brief, only: %i[show edit update destroy]
 

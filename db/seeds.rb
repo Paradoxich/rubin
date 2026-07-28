@@ -27,12 +27,6 @@ Brief.create!(
       body: "Every list needs a real empty state, not a blank panel. Sweep the app and note the gaps."
     },
     {
-      title: "Onboarding checklist card",
-      requester: "Leo Tanaka",
-      status: "in_review",
-      body: "Progressive checklist on the dashboard. Collapses once completed, never nags."
-    },
-    {
       title: "Dark theme contrast pass",
       requester: "Sofia Marino",
       status: "approved",

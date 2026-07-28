@@ -29,7 +29,7 @@ Tokens and type/surface classes come from the portfolio (`app/globals.css` / `do
 | Turbo Frame inline edit | Click Edit → edit in-frame → Save or Cancel |
 | Turbo Streams | Add / change status / remove briefs without full reload — rows join and leave the filtered lane, and the empty state appears when the last one goes |
 | Lane filter | The active filter rides along with the create form via the HTML `form` attribute, and with each row's status form as a param |
-| List cap | The index shows the five newest briefs; Show all reloads the `briefs` frame with the full lane |
+| List cap | Long lists show the twenty newest briefs; Show all reloads the `briefs` frame with the full lane |
 | Stimulus | `dropdown`, `filter`, `status-select`, `dismissable`, `flash`, `theme` in `app/javascript/controllers` |
 | ViewComponent | `StatusBadgeComponent`, `BriefRowComponent`, `AvatarComponent` |
 | Design tokens | Portfolio warm/cool/light tokens in `app/assets/tailwind/application.css` |
