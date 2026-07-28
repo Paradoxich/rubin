@@ -1,0 +1,4 @@
+<%= turbo_stream.replace @brief do %>
+  <%= render partial: "briefs/brief", locals: { brief: @brief } %>
+<% end %>
+<%= turbo_stream.update "flash", partial: "shared/flash", locals: { notice: "Brief updated." } %>

@@ -1,0 +1,55 @@
+<% content_for :title, "Briefs · Rubin" %>
+
+<section class="page">
+  <header class="page__header">
+    <div>
+      <p class="type-label">Practice lab</p>
+      <h1 class="type-h1" style="margin: var(--space-md) 0 0">Design briefs</h1>
+      <p class="type-body page__lede">
+        Same portfolio token layer, now driving a Hotwire surface: Turbo Frames,
+        Turbo Streams, Stimulus, and ViewComponents.
+      </p>
+    </div>
+
+    <div class="filter-bar" data-controller="filter">
+      <%= form_with url: briefs_path,
+            method: :get,
+            data: {
+              turbo_frame: "briefs",
+              filter_target: "form"
+            } do |f| %>
+        <label class="filter-bar__label type-label" for="status">Status</label>
+        <%= f.select :status,
+              options_for_select(
+                [["All", ""]] + Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] },
+                @status
+              ),
+              {},
+              {
+                id: "status",
+                class: "filter-bar__select",
+                data: { action: "change->filter#submit" }
+              } %>
+      <% end %>
+    </div>
+  </header>
+
+  <div id="flash">
+    <%= render "shared/flash", notice: flash[:notice] %>
+  </div>
+
+  <div class="layout">
+    <aside class="composer">
+      <h2 class="type-h4" style="margin: 0 0 var(--space-base)">New brief</h2>
+      <%= render "form", brief: @brief %>
+    </aside>
+
+    <%= turbo_frame_tag "briefs", class: "brief-list" do %>
+      <% if @briefs.any? %>
+        <%= render partial: "briefs/brief", collection: @briefs, as: :brief %>
+      <% else %>
+        <p class="empty type-body-sm">No briefs in this lane yet.</p>
+      <% end %>
+    <% end %>
+  </div>
+</section>

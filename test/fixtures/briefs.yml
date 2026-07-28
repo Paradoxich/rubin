@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: Homepage hero pass
+  status: in_review
+  body: Tighten the first viewport.
+  requester: Maya Chen
+
+two:
+  title: Pricing table states
+  status: inbox
+  body: Need hover and selected states.
+  requester: Jonah Park

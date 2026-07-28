@@ -1,0 +1,5 @@
+<%= turbo_stream.update "briefs" do %>
+  <%= render partial: "briefs/brief", collection: @briefs, as: :brief %>
+<% end %>
+<%= turbo_stream.replace "new_brief", partial: "briefs/form", locals: { brief: Brief.new } %>
+<%= turbo_stream.update "flash", partial: "shared/flash", locals: { notice: "Brief added." } %>

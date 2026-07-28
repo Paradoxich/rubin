@@ -1,0 +1,57 @@
+<% content_for :title, "Edit · #{@brief.title}" %>
+
+<%= turbo_frame_tag @brief do %>
+  <article
+    class="brief-editor"
+    data-controller="autosave"
+    data-action="turbo:submit-end->autosave#saved"
+  >
+    <div class="brief-editor__top">
+      <h2 class="type-h4" style="margin: 0">Edit brief</h2>
+      <p class="brief-editor__status" data-autosave-target="status">Ready</p>
+    </div>
+
+    <%= form_with model: @brief,
+          class: "brief-editor__form",
+          style: "margin-top: var(--space-base)",
+          data: { autosave_target: "form" } do |f| %>
+      <% if @brief.errors.any? %>
+        <div class="form-errors" role="alert">
+          <ul>
+            <% @brief.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title, data: { action: "input->autosave#queue" } %>
+      </div>
+
+      <div class="field">
+        <%= f.label :requester %>
+        <%= f.text_field :requester, data: { action: "input->autosave#queue" } %>
+      </div>
+
+      <div class="field">
+        <%= f.label :body, "Notes" %>
+        <%= f.text_area :body, rows: 5, data: { action: "input->autosave#queue" } %>
+      </div>
+
+      <div class="field">
+        <%= f.label :status %>
+        <%= f.select :status,
+              Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] },
+              {},
+              data: { action: "change->autosave#queue" } %>
+      </div>
+
+      <div class="brief-editor__actions">
+        <%= f.submit "Save", class: "primary-button" %>
+        <%= link_to "Cancel", briefs_path, class: "ghost-button type-body-sm-strong", data: { turbo_frame: "_top" } %>
+      </div>
+    <% end %>
+  </article>
+<% end %>

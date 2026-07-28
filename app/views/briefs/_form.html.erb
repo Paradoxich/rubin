@@ -1,0 +1,34 @@
+<%= form_with model: brief, class: "composer__form" do |f| %>
+  <% if brief.errors.any? %>
+    <div class="form-errors" role="alert">
+      <p><%= pluralize(brief.errors.count, "error") %> kept this from saving:</p>
+      <ul>
+        <% brief.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, required: true, placeholder: "Homepage hero pass" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :requester %>
+    <%= f.text_field :requester, required: true, placeholder: "Maya Chen" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body, "Notes" %>
+    <%= f.text_area :body, rows: 4, placeholder: "What needs attention, constraints, links…" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %>
+    <%= f.select :status, Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] } %>
+  </div>
+
+  <%= f.submit "Add brief", class: "primary-button" %>
+<% end %>

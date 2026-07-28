@@ -1,0 +1,51 @@
+<article class="brief-row">
+  <div class="brief-row__main">
+    <div class="brief-row__meta">
+      <%= render StatusBadgeComponent.new(status: brief.status) %>
+      <span class="type-body-sm"><%= brief.requester %></span>
+    </div>
+
+    <h2 class="brief-row__title">
+      <%= link_to brief.title, edit_brief_path(brief), class: "brief-row__link" %>
+    </h2>
+
+    <% if brief.body.present? %>
+      <p class="brief-row__body"><%= truncate(brief.body, length: 140) %></p>
+    <% end %>
+  </div>
+
+  <div class="brief-row__actions" data-controller="dropdown">
+    <button
+      type="button"
+      class="ghost-button type-body-sm-strong"
+      data-action="dropdown#toggle"
+      aria-haspopup="true"
+      aria-expanded="false"
+      data-dropdown-target="button"
+    >
+      Status
+    </button>
+
+    <div class="dropdown" data-dropdown-target="menu" hidden>
+      <% Brief::STATUSES.each do |status| %>
+        <%= button_to status.tr("_", " ").titleize,
+              brief_path(brief),
+              method: :patch,
+              params: { brief: { status: status } },
+              class: class_names("dropdown__item type-body-sm", "is-active": brief.status == status),
+              form: { data: { turbo_frame: "_top" } } %>
+      <% end %>
+    </div>
+
+    <%= button_to "Remove",
+          brief_path(brief),
+          method: :delete,
+          class: "ghost-button ghost-button--danger type-body-sm-strong",
+          form: {
+            data: {
+              turbo_confirm: "Remove this brief?",
+              turbo_frame: "_top"
+            }
+          } %>
+  </div>
+</article>
