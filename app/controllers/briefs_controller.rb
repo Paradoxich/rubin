@@ -25,12 +25,13 @@ class BriefsController < ApplicationController
 
   def create
     @brief = Brief.new(brief_params)
+    @status = params[:status].presence
 
     if @brief.save
-      @briefs = Brief.newest_first
+      @briefs = Brief.with_status(@status).newest_first
       respond_to do |format|
         format.turbo_stream
-        format.html { redirect_to briefs_path, notice: "Brief added." }
+        format.html { redirect_to briefs_path(status: @status), notice: "Brief added." }
       end
     else
       render :new, status: :unprocessable_entity

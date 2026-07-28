@@ -29,6 +29,13 @@
                   data: { filter_target: "field" } %>
           <% end %>
 
+          <%# Rides along with the create form (HTML form attribute), so new
+              briefs come back rendered into the currently filtered lane. %>
+          <%= hidden_field_tag :status, @status,
+                id: "brief_filter_status",
+                form: "brief_form_new",
+                data: { filter_target: "field" } %>
+
           <button
             type="button"
             class="<%= class_names("icon-button filter-bar__button", "is-active": @status.present?) %>"
@@ -74,11 +81,7 @@
     <%= render "briefs/new_brief_frame" %>
 
     <%= turbo_frame_tag "briefs", class: "brief-list" do %>
-      <% if @briefs.any? %>
-        <%= render partial: "briefs/brief", collection: @briefs, as: :brief %>
-      <% else %>
-        <p class="empty type-body-sm">No briefs in this lane yet.</p>
-      <% end %>
+      <%= render "briefs/list", briefs: @briefs %>
     <% end %>
   </div>
 </section>

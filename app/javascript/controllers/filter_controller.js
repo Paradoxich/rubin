@@ -12,9 +12,7 @@ export default class extends Controller {
   select(event) {
     const status = event.currentTarget.dataset.status ?? ""
 
-    if (this.hasFieldTarget) {
-      this.fieldTarget.value = status
-    }
+    this.fieldTargets.forEach((field) => { field.value = status })
 
     this.element.querySelectorAll("[data-status]").forEach((el) => {
       el.classList.toggle("is-active", el.dataset.status === status)

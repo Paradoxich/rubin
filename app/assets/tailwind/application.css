@@ -760,9 +760,15 @@
     border-top-right-radius: var(--radius-md);
   }
 
-  .brief-list > :last-child .brief-row {
+  .brief-list > turbo-frame:last-of-type .brief-row {
     border-bottom-left-radius: var(--radius-md);
     border-bottom-right-radius: var(--radius-md);
+  }
+
+  /* The empty message is always in the list markup so Turbo Stream removals
+     can reveal it; it only shows once the last row frame is gone. */
+  .brief-list > .empty:not(:only-child) {
+    display: none;
   }
 
   .brief-row {
@@ -824,7 +830,7 @@
   }
 
   /* Dividers live on turbo-frame wrappers — each row is :last-child inside its frame. */
-  .brief-list > *:not(:last-child) {
+  .brief-list > turbo-frame:not(:last-of-type) {
     border-bottom: 1px solid var(--color-border);
   }
 
