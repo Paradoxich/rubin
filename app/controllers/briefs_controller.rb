@@ -15,11 +15,6 @@ class BriefsController < ApplicationController
   end
 
   def new
-    if params[:close].present?
-      render partial: "briefs/new_brief_frame"
-      return
-    end
-
     @brief = Brief.new
   end
 

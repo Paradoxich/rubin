@@ -66,7 +66,11 @@
   </div>
 
   <div class="brief-editor__actions">
-    <%= link_to "Cancel", cancel_path, class: "ghost-button type-body-sm" %>
+    <% if local_assigns[:cancel_path] %>
+      <%= link_to "Cancel", cancel_path, class: "ghost-button type-body-sm" %>
+    <% else %>
+      <button type="button" class="ghost-button type-body-sm" data-action="dismissable#dismiss">Cancel</button>
+    <% end %>
     <%= f.submit submit_label, class: "primary-button" %>
   </div>
 <% end %>

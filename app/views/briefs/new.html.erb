@@ -1,14 +1,13 @@
 <% content_for :title, "New brief · Rubin" %>
 
 <%= turbo_frame_tag "new_brief" do %>
-  <article class="brief-editor brief-editor--panel">
+  <article class="brief-editor brief-editor--panel" data-controller="dismissable">
     <div class="brief-editor__top">
       <h2 class="type-h4 m-0">New brief</h2>
     </div>
 
     <%= render "form",
           brief: @brief,
-          submit_label: "Add brief",
-          cancel_path: new_brief_path(close: 1) %>
+          submit_label: "Add brief" %>
   </article>
 <% end %>
