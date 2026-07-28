@@ -29,7 +29,42 @@
 
   <div class="field">
     <%= f.label :status %>
-    <%= f.select :status, Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] } %>
+    <div class="status-field" data-controller="dropdown status-select">
+      <%= f.hidden_field :status, data: { status_select_target: "field" } %>
+
+      <button
+        type="button"
+        class="status-chip-trigger status-field__trigger"
+        data-action="dropdown#toggle"
+        data-dropdown-target="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        aria-label="Change status"
+      >
+        <span
+          class="<%= class_names("badge", "type-body-sm", "status-field__badge", "badge--#{brief.status.presence || "inbox"}") %>"
+          data-status-select-target="badge"
+        >
+          <span data-status-select-target="label"><%= (brief.status.presence || "inbox").tr("_", " ").titleize %></span>
+          <svg class="status-field__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </button>
+
+      <div class="dropdown status-field__menu" data-dropdown-target="menu" hidden>
+        <% Brief::STATUSES.each do |status| %>
+          <button
+            type="button"
+            class="<%= class_names("dropdown__item type-body-sm", "is-active": brief.status == status) %>"
+            data-action="click->status-select#pick click->dropdown#close"
+            data-status="<%= status %>"
+          >
+            <%= render StatusBadgeComponent.new(status: status) %>
+          </button>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="brief-editor__actions">

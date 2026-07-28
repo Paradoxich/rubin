@@ -5,57 +5,50 @@
     <% if brief.body.present? %>
       <p class="brief-row__body"><%= truncate(brief.body, length: 140) %></p>
     <% end %>
+  </div>
 
-    <div class="brief-row__meta">
-      <div class="brief-row__status" data-controller="dropdown">
-        <button
-          type="button"
-          class="status-chip-trigger"
-          data-action="dropdown#toggle"
-          data-dropdown-target="button"
-          aria-haspopup="true"
-          aria-expanded="false"
-          aria-label="Change status"
-        >
-          <%= render StatusBadgeComponent.new(status: brief.status) %>
-        </button>
+  <div class="brief-row__status" data-controller="dropdown">
+    <button
+      type="button"
+      class="status-chip-trigger"
+      data-action="dropdown#toggle"
+      data-dropdown-target="button"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-label="Change status"
+    >
+      <%= render StatusBadgeComponent.new(status: brief.status) %>
+    </button>
 
-        <div class="dropdown" data-dropdown-target="menu" hidden>
-          <% Brief::STATUSES.each do |status| %>
-            <%= button_to status.tr("_", " ").titleize,
-                  brief_path(brief),
-                  method: :patch,
-                  params: { brief: { status: status } },
-                  class: class_names("dropdown__item type-body-sm", "is-active": brief.status == status),
-                  form: { data: { turbo_frame: "_top" } } %>
-          <% end %>
-        </div>
-      </div>
-
-      <span class="type-body-sm"><%= brief.requester %></span>
+    <div class="dropdown" data-dropdown-target="menu" hidden>
+      <% Brief::STATUSES.each do |status| %>
+        <%= button_to status.tr("_", " ").titleize,
+              brief_path(brief),
+              method: :patch,
+              params: { brief: { status: status } },
+              class: class_names("dropdown__item type-body-sm", "is-active": brief.status == status),
+              form: { data: { turbo_frame: "_top" } } %>
+      <% end %>
     </div>
   </div>
 
-  <div class="brief-row__actions">
-    <%= link_to edit_brief_path(brief), class: "icon-button", aria: { label: "Edit" } do %>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M11.5 2.5l2 2M3 13l.5-2.5L11 3l2 2-7.5 7.5L3 13z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    <% end %>
-
-    <%= button_to brief_path(brief),
-          method: :delete,
-          class: "icon-button icon-button--danger",
-          form: {
-            data: {
-              turbo_confirm: "Remove this brief?",
-              turbo_frame: "_top"
-            }
-          },
-          aria: { label: "Remove" } do %>
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-        <path d="M3.5 4.5h9M6.5 4.5V3.5h3v1M5.5 4.5l.5 8h4l.5-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    <% end %>
+  <div class="brief-row__person" title="<%= brief.requester %>">
+    <span class="brief-row__created-by type-body-sm">Created by</span>
+    <%= render AvatarComponent.new(name: brief.requester) %>
+    <span class="brief-row__hit-label"><%= brief.requester %></span>
   </div>
+
+  <time
+    class="brief-row__created type-body-sm"
+    datetime="<%= brief.created_at.iso8601 %>"
+    title="<%= l(brief.created_at, format: :long) %>"
+  >
+    <%= helpers.short_time_ago(brief.created_at) %>
+  </time>
+
+  <%= link_to edit_brief_path(brief),
+        class: "brief-row__hit",
+        aria: { label: "Edit #{brief.title}" } do %>
+    <span class="brief-row__hit-label">Edit</span>
+  <% end %>
 </article>

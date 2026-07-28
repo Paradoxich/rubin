@@ -16,32 +16,56 @@
       <h2 class="type-h4" style="margin: 0">Briefs</h2>
 
       <div class="brief-panel__toolbar">
-        <%= link_to "Add brief",
-              new_brief_path,
-              class: "primary-button",
-              data: { turbo_frame: "new_brief" } %>
-
-        <div class="filter-bar" data-controller="filter">
+        <div class="filter-bar" data-controller="filter dropdown">
           <%= form_with url: briefs_path,
                 method: :get,
                 data: {
                   turbo_frame: "briefs",
                   filter_target: "form"
                 } do |f| %>
-            <%= f.select :status,
-                  options_for_select(
-                    [["All", ""]] + Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] },
-                    @status
-                  ),
-                  {},
-                  {
-                    id: "status",
-                    class: "filter-bar__select",
-                    aria: { label: "Filter by status" },
-                    data: { action: "change->filter#submit" }
-                  } %>
+            <%= f.hidden_field :status,
+                  value: @status,
+                  id: "status",
+                  data: { filter_target: "field" } %>
           <% end %>
+
+          <button
+            type="button"
+            class="icon-button"
+            data-action="dropdown#toggle"
+            data-dropdown-target="button"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Filter by status"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2.5 3.5h11l-4 4.5v3.5L6.5 13V8L2.5 3.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="dropdown" data-dropdown-target="menu" hidden>
+            <button
+              type="button"
+              class="<%= class_names("dropdown__item type-body-sm", "is-active": @status.blank?) %>"
+              data-action="click->filter#select click->dropdown#close"
+              data-status=""
+            >All</button>
+
+            <% Brief::STATUSES.each do |status| %>
+              <button
+                type="button"
+                class="<%= class_names("dropdown__item type-body-sm", "is-active": @status == status) %>"
+                data-action="click->filter#select click->dropdown#close"
+                data-status="<%= status %>"
+              ><%= status.tr("_", " ").titleize %></button>
+            <% end %>
+          </div>
         </div>
+
+        <%= link_to "Add brief",
+              new_brief_path,
+              class: "primary-button",
+              data: { turbo_frame: "new_brief" } %>
       </div>
     </div>
 

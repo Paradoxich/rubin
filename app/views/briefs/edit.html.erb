@@ -4,6 +4,20 @@
   <article class="brief-editor">
     <div class="brief-editor__top">
       <h2 class="type-h4" style="margin: 0">Edit brief</h2>
+
+      <%= button_to brief_path(@brief),
+            method: :delete,
+            class: "icon-button icon-button--danger",
+            form: {
+              data: {
+                turbo_confirm: "Remove this brief?"
+              }
+            },
+            aria: { label: "Remove" } do %>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3.5 4.5h9M6.5 4.5V3.5h3v1M5.5 4.5l.5 8h4l.5-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      <% end %>
     </div>
 
     <%= render "form",
