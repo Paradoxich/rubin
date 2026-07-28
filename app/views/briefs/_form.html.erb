@@ -67,7 +67,9 @@
 
   <div class="brief-editor__actions">
     <% if local_assigns[:cancel_path] %>
-      <%= link_to "Cancel", cancel_path, class: "ghost-button type-body-sm" %>
+      <%= link_to "Cancel", cancel_path,
+            class: "ghost-button type-body-sm",
+            data: { dismissable_target: "link" } %>
     <% else %>
       <button type="button" class="ghost-button type-body-sm" data-action="dismissable#dismiss">Cancel</button>
     <% end %>

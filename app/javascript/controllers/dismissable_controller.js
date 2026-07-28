@@ -1,7 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Removes its element — closes the inline new-brief editor without a round trip.
+// Closes an inline editor: follows its cancel link when it has one
+// (edit restores the row by frame navigation), otherwise removes the
+// element (the new editor just disappears).
 export default class extends Controller {
+  static targets = ["link"]
+
   connect() {
     this.boundEscape = this.dismissOnEscape.bind(this)
     document.addEventListener("keydown", this.boundEscape)
@@ -12,7 +16,7 @@ export default class extends Controller {
   }
 
   dismiss() {
-    this.element.remove()
+    this.hasLinkTarget ? this.linkTarget.click() : this.element.remove()
   }
 
   dismissOnEscape(event) {

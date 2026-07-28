@@ -1,7 +1,7 @@
 <% content_for :title, "Edit · #{@brief.title}" %>
 
 <%= turbo_frame_tag @brief do %>
-  <article class="brief-editor">
+  <article class="brief-editor" data-controller="dismissable">
     <div class="brief-editor__top">
       <h2 class="type-h4 m-0">Edit brief</h2>
 
