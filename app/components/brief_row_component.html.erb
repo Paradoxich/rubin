@@ -20,14 +20,15 @@
       <%= render StatusBadgeComponent.new(status: brief.status) %>
     </button>
 
-    <div class="dropdown" data-dropdown-target="menu" hidden>
+    <div class="dropdown brief-row__status-menu" data-dropdown-target="menu" hidden>
       <% Brief::STATUSES.each do |status| %>
-        <%= button_to status.tr("_", " ").titleize,
-              brief_path(brief),
+        <%= button_to brief_path(brief),
               method: :patch,
               params: { brief: { status: status } },
-              class: class_names("dropdown__item type-body-sm", "is-active": brief.status == status),
-              form: { data: { turbo_frame: "_top" } } %>
+              class: class_names("dropdown__item", "is-active": brief.status == status),
+              form: { data: { turbo_frame: "_top" } } do %>
+          <%= render StatusBadgeComponent.new(status: status) %>
+        <% end %>
       <% end %>
     </div>
   </div>
