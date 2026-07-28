@@ -831,12 +831,18 @@
   .brief-row__status-menu {
     left: 0;
     right: auto;
-    min-width: 8rem;
+    width: max-content;
+    min-width: 7rem;
   }
 
   .brief-row__status-menu form {
     display: block;
+    width: 100%;
     margin: 0;
+  }
+
+  .brief-row__status-menu .dropdown__item {
+    width: 100%;
   }
 
   .brief-row__person {
@@ -920,7 +926,12 @@
   .status-field__menu {
     left: 0;
     right: auto;
-    min-width: 8rem;
+    width: max-content;
+    min-width: 7rem;
+  }
+
+  .status-field__menu .dropdown__item {
+    width: 100%;
   }
 
   .brief-row__title {
