@@ -45,3 +45,6 @@
 
 # macOS
 .DS_Store
+
+# Local agent/editor tooling config
+/.claude

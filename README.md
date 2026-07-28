@@ -20,17 +20,20 @@ Tokens and type/surface classes come from the portfolio (`app/globals.css` / `do
 - Semantic aliases (`--color-bg`, `--color-text-primary`, spacing, radius, type scale)
 - Utility bridge so portfolio-style classes work (`bg-color-bg`, `type-h1`, `card-interactive`, …)
 - Theme switcher Stimulus controller persists choice in `localStorage`
+- Geist Sans / Mono self-hosted as variable woff2 (`app/assets/fonts`), no CDN
 
 ## What to poke at
 
 | Surface | Where |
 |---|---|
 | Turbo Frame inline edit | Click Edit → edit in-frame → Save or Cancel |
-| Turbo Streams | Add / change status / remove briefs without full reload |
-| Stimulus | `dropdown`, `filter`, `flash`, `theme` in `app/javascript/controllers` |
-| ViewComponent | `StatusBadgeComponent`, `BriefRowComponent` |
+| Turbo Streams | Add / change status / remove briefs without full reload — rows join and leave the filtered lane, and the empty state appears when the last one goes |
+| Lane filter | The active filter rides along with the create form via the HTML `form` attribute, and with each row's status form as a param |
+| Stimulus | `dropdown`, `filter`, `status-select`, `dismissable`, `flash`, `theme` in `app/javascript/controllers` |
+| ViewComponent | `StatusBadgeComponent`, `BriefRowComponent`, `AvatarComponent` |
 | Design tokens | Portfolio warm/cool/light tokens in `app/assets/tailwind/application.css` |
 | Theme switcher | `theme_controller.js` + `data-theme` on `<html>` |
+| Tests | `test/controllers/briefs_controller_test.rb` asserts the Turbo Stream responses |
 
 ## Setup
 
@@ -51,6 +54,12 @@ bin/dev
 Open [http://localhost:3000](http://localhost:3000).
 
 `bin/dev` runs Rails and the Tailwind watcher via Foreman.
+
+Run the tests with:
+
+```bash
+bin/rails test
+```
 
 ## Suggested practice order
 
