@@ -833,6 +833,8 @@
     right: auto;
     width: max-content;
     min-width: 7rem;
+    display: grid;
+    gap: 3px;
   }
 
   .brief-row__status-menu form {
@@ -928,6 +930,8 @@
     right: auto;
     width: max-content;
     min-width: 7rem;
+    display: grid;
+    gap: 3px;
   }
 
   .status-field__menu .dropdown__item {
