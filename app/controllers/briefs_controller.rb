@@ -20,7 +20,7 @@ class BriefsController < ApplicationController
 
   def create
     @brief = Brief.new(brief_params)
-    @status = params[:status].presence
+    @status = filter_status
 
     if @brief.save
       @briefs = Brief.with_status(@status).newest_first
@@ -38,11 +38,13 @@ class BriefsController < ApplicationController
   end
 
   def update
+    @status = filter_status
+
     if @brief.update(brief_params)
       notice = "Brief updated."
       respond_to do |format|
         format.turbo_stream { flash.now[:notice] = notice }
-        format.html { redirect_to briefs_path, notice: notice }
+        format.html { redirect_to briefs_path(status: @status), notice: notice }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -67,5 +69,11 @@ class BriefsController < ApplicationController
 
   def brief_params
     params.expect(brief: [ :title, :status, :body, :requester ])
+  end
+
+  # The active list filter, carried by forms as a top-level status param.
+  def filter_status
+    status = params[:status].presence
+    status if Brief::STATUSES.include?(status)
   end
 end

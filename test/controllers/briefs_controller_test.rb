@@ -81,6 +81,15 @@ class BriefsControllerTest < ActionDispatch::IntegrationTest
     assert_equal "approved", @brief.reload.status
   end
 
+  test "update removes the row when it leaves the filtered lane" do
+    patch brief_url(@brief),
+      params: { status: "in_review", brief: { status: "approved" } },
+      headers: TURBO_ACCEPT
+
+    assert_turbo_stream action: :remove, target: dom_id(@brief)
+    assert_equal "approved", @brief.reload.status
+  end
+
   test "update without turbo redirects to the index" do
     patch brief_url(@brief), params: { brief: { title: "Renamed" } }
 

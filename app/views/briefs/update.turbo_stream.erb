@@ -1,4 +1,8 @@
-<%= turbo_stream.replace @brief do %>
-  <%= render partial: "briefs/brief", locals: { brief: @brief } %>
+<% if @status.present? && @brief.status != @status %>
+  <%= turbo_stream.remove @brief %>
+<% else %>
+  <%= turbo_stream.replace @brief do %>
+    <%= render partial: "briefs/brief", locals: { brief: @brief, filter_status: @status } %>
+  <% end %>
 <% end %>
 <%= turbo_stream.update "flash", partial: "shared/flash", locals: { notice: flash[:notice] } %>

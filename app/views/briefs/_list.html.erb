@@ -1,2 +1,3 @@
-<%= render partial: "briefs/brief", collection: briefs, as: :brief %>
+<%= render partial: "briefs/brief", collection: briefs, as: :brief,
+      locals: { filter_status: local_assigns[:filter_status] } %>
 <p class="empty type-body-sm">No briefs in this lane yet.</p>

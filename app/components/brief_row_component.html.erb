@@ -25,7 +25,7 @@
         <%= button_to Brief.status_label(status),
               brief_path(brief),
               method: :patch,
-              params: { brief: { status: status } },
+              params: { brief: { status: status }, status: filter_status },
               class: class_names("dropdown__item type-body-sm", "is-active": brief.status == status),
               form: { data: { turbo_frame: "_top" } } %>
       <% end %>
