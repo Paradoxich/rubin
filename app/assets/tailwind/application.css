@@ -652,8 +652,15 @@
   .primary-button,
   .ghost-button,
   .dropdown__item {
-    font: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
     cursor: pointer;
+  }
+
+  .dropdown__item {
+    font-size: var(--font-size-xs);
   }
 
   .primary-button {
