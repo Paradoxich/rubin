@@ -831,21 +831,12 @@
   .brief-row__status-menu {
     left: 0;
     right: auto;
-    width: max-content;
-    min-width: 0;
-    display: grid;
-    gap: var(--space-xs);
+    min-width: 8rem;
   }
 
   .brief-row__status-menu form {
     display: block;
     margin: 0;
-  }
-
-  .brief-row__status-menu .dropdown__item {
-    display: flex;
-    align-items: center;
-    width: auto;
   }
 
   .brief-row__person {
@@ -929,16 +920,7 @@
   .status-field__menu {
     left: 0;
     right: auto;
-    width: max-content;
-    min-width: 0;
-    display: grid;
-    gap: var(--space-xs);
-  }
-
-  .status-field__menu .dropdown__item {
-    display: flex;
-    align-items: center;
-    width: auto;
+    min-width: 8rem;
   }
 
   .brief-row__title {

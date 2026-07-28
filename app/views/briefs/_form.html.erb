@@ -59,9 +59,7 @@
             class="<%= class_names("dropdown__item type-body-sm", "is-active": brief.status == status) %>"
             data-action="click->status-select#pick click->dropdown#close"
             data-status="<%= status %>"
-          >
-            <%= render StatusBadgeComponent.new(status: status) %>
-          </button>
+          ><%= status.tr("_", " ").titleize %></button>
         <% end %>
       </div>
     </div>
