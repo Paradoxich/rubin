@@ -69,6 +69,21 @@
   --color-grid-line: var(--color-20);
   --color-nav-item-bg-active: var(--color-05);
   --color-nav-item-bg-hover: var(--color-05);
+
+  /*
+   * Status chips on light: solid fills + dark label text.
+   * Dark themes use soft tints with accent-colored text; that goes muddy on cream.
+   * In Review mirrors the primary CTA (accent fill + ink text).
+   */
+  --color-status-inbox-bg: var(--color-20);
+  --color-status-inbox-fg: var(--color-90);
+  --color-status-inbox-border: var(--color-40);
+  --color-status-review-bg: var(--color-accent-70);
+  --color-status-review-fg: var(--color-90);
+  --color-status-review-border: var(--color-accent-60);
+  --color-status-approved-bg: #d3edd9;
+  --color-status-approved-fg: #0b5c24;
+  --color-status-approved-border: #8fc89a;
 }
 
 :root {
@@ -167,13 +182,17 @@
 
   --font-feature-editorial: "ss02" 1, "ss03" 1, "liga" 0;
 
-  /* App-local status roles (built on portfolio tokens) */
-  --color-status-inbox-bg: var(--color-bg-label);
-  --color-status-inbox-fg: var(--color-text-secondary);
-  --color-status-review-bg: color-mix(in oklab, var(--color-accent-70) 22%, var(--color-bg-card));
+  /* App-local status roles — defaults tuned for warm/cool (dark).
+     Light overrides live in :root[data-theme="light"]. */
+  --color-status-inbox-bg: var(--color-20);
+  --color-status-inbox-fg: var(--color-80);
+  --color-status-inbox-border: var(--color-30);
+  --color-status-review-bg: color-mix(in oklab, var(--color-accent-70) 16%, transparent);
   --color-status-review-fg: var(--color-accent-70);
-  --color-status-approved-bg: color-mix(in oklab, var(--color-success) 18%, var(--color-bg-card));
+  --color-status-review-border: color-mix(in oklab, var(--color-accent-70) 32%, transparent);
+  --color-status-approved-bg: color-mix(in oklab, var(--color-success) 14%, transparent);
   --color-status-approved-fg: var(--color-success);
+  --color-status-approved-border: color-mix(in oklab, var(--color-success) 28%, transparent);
   --color-danger: #c45c51;
 }
 
@@ -729,6 +748,7 @@
     display: inline-flex;
     align-items: center;
     border-radius: var(--radius-full);
+    border: 1px solid transparent;
     padding: 0.25rem 0.65rem;
     font-size: var(--font-size-xxxs);
     font-weight: var(--font-weight-medium);
@@ -740,16 +760,19 @@
   .badge--inbox {
     background: var(--color-status-inbox-bg);
     color: var(--color-status-inbox-fg);
+    border-color: var(--color-status-inbox-border);
   }
 
   .badge--in_review {
     background: var(--color-status-review-bg);
     color: var(--color-status-review-fg);
+    border-color: var(--color-status-review-border);
   }
 
   .badge--approved {
     background: var(--color-status-approved-bg);
     color: var(--color-status-approved-fg);
+    border-color: var(--color-status-approved-border);
   }
 
   .filter-bar {
