@@ -1029,6 +1029,30 @@
     align-items: center;
   }
 
+  .filter-bar__button {
+    position: relative;
+  }
+
+  .filter-bar__button.is-active {
+    border-color: var(--color-50);
+    background: var(--color-bg-muted);
+  }
+
+  .filter-bar__dot {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: var(--radius-full);
+    background: var(--color-text-primary);
+    display: none;
+  }
+
+  .filter-bar__button.is-active .filter-bar__dot {
+    display: block;
+  }
+
   .brief-panel__toolbar .icon-button {
     width: 40px;
     height: 40px;

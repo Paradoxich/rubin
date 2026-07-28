@@ -31,16 +31,18 @@
 
           <button
             type="button"
-            class="icon-button"
+            class="<%= class_names("icon-button filter-bar__button", "is-active": @status.present?) %>"
             data-action="dropdown#toggle"
             data-dropdown-target="button"
+            data-filter-target="button"
             aria-haspopup="true"
             aria-expanded="false"
-            aria-label="Filter by status"
+            aria-label="<%= @status.present? ? "Filter by status (#{@status.tr("_", " ").titleize})" : "Filter by status" %>"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M2.5 3.5h11l-4 4.5v3.5L6.5 13V8L2.5 3.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
+            <span class="filter-bar__dot" aria-hidden="true"></span>
           </button>
 
           <div class="dropdown" data-dropdown-target="menu" hidden>
