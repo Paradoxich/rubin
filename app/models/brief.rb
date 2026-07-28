@@ -13,8 +13,12 @@ class Brief < ApplicationRecord
     status.present? && STATUSES.include?(status) ? where(status: status) : all
   }
 
+  def self.status_label(status)
+    status.to_s.tr("_", " ").titleize
+  end
+
   def status_label
-    status.tr("_", " ").titleize
+    self.class.status_label(status)
   end
 
   private

@@ -10,6 +10,6 @@ class StatusBadgeComponent < ViewComponent::Base
   private
 
   def label
-    @status.to_s.tr("_", " ").titleize
+    Brief.status_label(@status)
   end
 end

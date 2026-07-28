@@ -44,7 +44,7 @@
             data-filter-target="button"
             aria-haspopup="true"
             aria-expanded="false"
-            aria-label="<%= @status.present? ? "Filter by status (#{@status.tr("_", " ").titleize})" : "Filter by status" %>"
+            aria-label="<%= @status.present? ? "Filter by status (#{Brief.status_label(@status)})" : "Filter by status" %>"
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M2.5 3.5h11l-4 4.5v3.5L6.5 13V8L2.5 3.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -66,7 +66,7 @@
                 class="<%= class_names("dropdown__item type-body-sm", "is-active": @status == status) %>"
                 data-action="click->filter#select click->dropdown#close"
                 data-status="<%= status %>"
-              ><%= status.tr("_", " ").titleize %></button>
+              ><%= Brief.status_label(status) %></button>
             <% end %>
           </div>
         </div>

@@ -22,7 +22,7 @@
 
     <div class="dropdown brief-row__status-menu" data-dropdown-target="menu" hidden>
       <% Brief::STATUSES.each do |status| %>
-        <%= button_to status.tr("_", " ").titleize,
+        <%= button_to Brief.status_label(status),
               brief_path(brief),
               method: :patch,
               params: { brief: { status: status } },

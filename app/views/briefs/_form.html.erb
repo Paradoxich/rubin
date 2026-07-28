@@ -45,7 +45,7 @@
           class="<%= class_names("badge", "type-body-sm", "status-field__badge", "badge--#{brief.status.presence || "inbox"}") %>"
           data-status-select-target="badge"
         >
-          <span data-status-select-target="label"><%= (brief.status.presence || "inbox").tr("_", " ").titleize %></span>
+          <span data-status-select-target="label"><%= Brief.status_label(brief.status.presence || "inbox") %></span>
           <svg class="status-field__chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
             <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -59,7 +59,7 @@
             class="<%= class_names("dropdown__item type-body-sm", "is-active": brief.status == status) %>"
             data-action="click->status-select#pick click->dropdown#close"
             data-status="<%= status %>"
-          ><%= status.tr("_", " ").titleize %></button>
+          ><%= Brief.status_label(status) %></button>
         <% end %>
       </div>
     </div>

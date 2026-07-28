@@ -19,12 +19,12 @@ export default class extends Controller {
     })
 
     if (this.hasButtonTarget) {
+      const label = event.currentTarget.textContent.trim()
+
       this.buttonTarget.classList.toggle("is-active", status !== "")
       this.buttonTarget.setAttribute(
         "aria-label",
-        status
-          ? `Filter by status (${status.replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase())})`
-          : "Filter by status"
+        status ? `Filter by status (${label})` : "Filter by status"
       )
     }
 

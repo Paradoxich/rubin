@@ -9,7 +9,7 @@ export default class extends Controller {
     if (!status) return
 
     this.fieldTarget.value = status
-    this.labelTarget.textContent = status.replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    this.labelTarget.textContent = event.currentTarget.textContent.trim()
     this.badgeTarget.className = `badge type-body-sm status-field__badge badge--${status}`
 
     this.element.querySelectorAll("[data-status]").forEach((el) => {
