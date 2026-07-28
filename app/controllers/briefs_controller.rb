@@ -4,7 +4,6 @@ class BriefsController < ApplicationController
   def index
     @status = params[:status]
     @briefs = Brief.with_status(@status).newest_first
-    @brief = Brief.new
   end
 
   def show
@@ -16,6 +15,11 @@ class BriefsController < ApplicationController
   end
 
   def new
+    if params[:close].present?
+      render partial: "briefs/new_brief_frame"
+      return
+    end
+
     @brief = Brief.new
   end
 
@@ -29,9 +33,7 @@ class BriefsController < ApplicationController
         format.html { redirect_to briefs_path, notice: "Brief added." }
       end
     else
-      @status = nil
-      @briefs = Brief.newest_first
-      render :index, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 

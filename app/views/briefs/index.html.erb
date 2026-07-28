@@ -1,44 +1,51 @@
-<% content_for :title, "Briefs · Rubin" %>
+<% content_for :title, "Practice lab · Rubin" %>
 
 <section class="page">
   <header class="page__header">
     <div>
-      <p class="type-label">Practice lab</p>
-      <h1 class="type-h1" style="margin: var(--space-md) 0 0">Design briefs</h1>
+      <h1 class="type-h1">Practice lab</h1>
       <p class="type-body page__lede">
         Same portfolio token layer, now driving a Hotwire surface: Turbo Frames,
         Turbo Streams, Stimulus, and ViewComponents.
       </p>
     </div>
-
-    <div class="filter-bar" data-controller="filter">
-      <%= form_with url: briefs_path,
-            method: :get,
-            data: {
-              turbo_frame: "briefs",
-              filter_target: "form"
-            } do |f| %>
-        <label class="filter-bar__label type-label" for="status">Status</label>
-        <%= f.select :status,
-              options_for_select(
-                [["All", ""]] + Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] },
-                @status
-              ),
-              {},
-              {
-                id: "status",
-                class: "filter-bar__select",
-                data: { action: "change->filter#submit" }
-              } %>
-      <% end %>
-    </div>
   </header>
 
-  <div class="layout">
-    <aside class="composer">
-      <h2 class="type-h4" style="margin: 0 0 var(--space-base)">New brief</h2>
-      <%= render "form", brief: @brief %>
-    </aside>
+  <div class="brief-panel">
+    <div class="brief-panel__header">
+      <h2 class="type-h4" style="margin: 0">Briefs</h2>
+
+      <div class="brief-panel__toolbar">
+        <%= link_to "Add brief",
+              new_brief_path,
+              class: "primary-button",
+              data: { turbo_frame: "new_brief" } %>
+
+        <div class="filter-bar" data-controller="filter">
+          <%= form_with url: briefs_path,
+                method: :get,
+                data: {
+                  turbo_frame: "briefs",
+                  filter_target: "form"
+                } do |f| %>
+            <%= f.select :status,
+                  options_for_select(
+                    [["All", ""]] + Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] },
+                    @status
+                  ),
+                  {},
+                  {
+                    id: "status",
+                    class: "filter-bar__select",
+                    aria: { label: "Filter by status" },
+                    data: { action: "change->filter#submit" }
+                  } %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render "briefs/new_brief_frame" %>
 
     <%= turbo_frame_tag "briefs", class: "brief-list" do %>
       <% if @briefs.any? %>

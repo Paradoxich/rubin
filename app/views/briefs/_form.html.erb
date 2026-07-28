@@ -1,4 +1,6 @@
-<%= form_with model: brief, class: "composer__form" do |f| %>
+<%= form_with model: brief,
+      class: "brief-editor__form",
+      html: { id: brief.persisted? ? nil : "brief_form_new" } do |f| %>
   <% if brief.errors.any? %>
     <div class="form-errors" role="alert">
       <p><%= pluralize(brief.errors.count, "error") %> kept this from saving:</p>
@@ -12,7 +14,7 @@
 
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title, required: true, placeholder: "Homepage hero pass" %>
+    <%= f.text_field :title, required: true, placeholder: "Homepage hero pass", autofocus: !brief.persisted? %>
   </div>
 
   <div class="field">
@@ -30,5 +32,8 @@
     <%= f.select :status, Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] } %>
   </div>
 
-  <%= f.submit "Add brief", class: "primary-button" %>
+  <div class="brief-editor__actions">
+    <%= link_to "Cancel", cancel_path, class: "ghost-button type-body-sm" %>
+    <%= f.submit submit_label, class: "primary-button" %>
+  </div>
 <% end %>

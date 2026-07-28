@@ -6,43 +6,9 @@
       <h2 class="type-h4" style="margin: 0">Edit brief</h2>
     </div>
 
-    <%= form_with model: @brief,
-          class: "brief-editor__form",
-          style: "margin-top: var(--space-base)" do |f| %>
-      <% if @brief.errors.any? %>
-        <div class="form-errors" role="alert">
-          <ul>
-            <% @brief.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class="field">
-        <%= f.label :title %>
-        <%= f.text_field :title %>
-      </div>
-
-      <div class="field">
-        <%= f.label :requester %>
-        <%= f.text_field :requester %>
-      </div>
-
-      <div class="field">
-        <%= f.label :body, "Notes" %>
-        <%= f.text_area :body, rows: 5 %>
-      </div>
-
-      <div class="field">
-        <%= f.label :status %>
-        <%= f.select :status, Brief::STATUSES.map { |s| [s.tr("_", " ").titleize, s] } %>
-      </div>
-
-      <div class="brief-editor__actions">
-        <%= link_to "Cancel", brief_path(@brief), class: "ghost-button type-body-sm" %>
-        <%= f.submit "Save", class: "primary-button" %>
-      </div>
-    <% end %>
+    <%= render "form",
+          brief: @brief,
+          submit_label: "Save",
+          cancel_path: brief_path(@brief) %>
   </article>
 <% end %>
