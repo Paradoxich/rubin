@@ -8,7 +8,7 @@ class Brief < ApplicationRecord
 
   before_validation :assign_default_status, on: :create
 
-  scope :newest_first, -> { order(updated_at: :desc) }
+  scope :newest_first, -> { order(created_at: :desc) }
   scope :with_status, ->(status) {
     status.present? && STATUSES.include?(status) ? where(status: status) : all
   }
