@@ -840,8 +840,6 @@
     right: auto;
     width: max-content;
     min-width: 7rem;
-    display: grid;
-    gap: 4px;
   }
 
   .brief-row__status-menu form {
@@ -937,8 +935,6 @@
     right: auto;
     width: max-content;
     min-width: 7rem;
-    display: grid;
-    gap: 4px;
   }
 
   .status-field__menu .dropdown__item {
@@ -981,6 +977,8 @@
     border-radius: var(--radius-md);
     background: var(--color-bg);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+    display: grid;
+    gap: 4px;
   }
 
   .dropdown__item {
