@@ -745,13 +745,13 @@
   }
 
   .brief-list > :first-child .brief-row {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
   }
 
   .brief-list > :last-child .brief-row {
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
   }
 
   .brief-row {
