@@ -43,6 +43,9 @@ class BriefsControllerTest < ActionDispatch::IntegrationTest
       assert_select ".brief-row__title", text: "Docs sweep"
     end
     assert_turbo_stream action: :update, target: "new_brief"
+    assert_turbo_stream action: :update, target: "flash" do
+      assert_select ".flash__message", text: "Brief added."
+    end
   end
 
   test "create keeps the active status filter" do
@@ -76,6 +79,12 @@ class BriefsControllerTest < ActionDispatch::IntegrationTest
 
     assert_turbo_stream action: :replace, target: dom_id(@brief)
     assert_equal "approved", @brief.reload.status
+  end
+
+  test "update without turbo redirects to the index" do
+    patch brief_url(@brief), params: { brief: { title: "Renamed" } }
+
+    assert_redirected_to briefs_path
   end
 
   test "update with invalid params rerenders the editor" do

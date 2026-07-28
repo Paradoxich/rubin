@@ -29,9 +29,10 @@ class BriefsController < ApplicationController
 
     if @brief.save
       @briefs = Brief.with_status(@status).newest_first
+      notice = "Brief added."
       respond_to do |format|
-        format.turbo_stream
-        format.html { redirect_to briefs_path(status: @status), notice: "Brief added." }
+        format.turbo_stream { flash.now[:notice] = notice }
+        format.html { redirect_to briefs_path(status: @status), notice: notice }
       end
     else
       render :new, status: :unprocessable_entity
@@ -43,9 +44,10 @@ class BriefsController < ApplicationController
 
   def update
     if @brief.update(brief_params)
+      notice = "Brief updated."
       respond_to do |format|
-        format.turbo_stream
-        format.html { render :edit }
+        format.turbo_stream { flash.now[:notice] = notice }
+        format.html { redirect_to briefs_path, notice: notice }
       end
     else
       render :edit, status: :unprocessable_entity
@@ -55,9 +57,10 @@ class BriefsController < ApplicationController
   def destroy
     @brief.destroy!
 
+    notice = "Brief removed."
     respond_to do |format|
-      format.turbo_stream
-      format.html { redirect_to briefs_path, notice: "Brief removed." }
+      format.turbo_stream { flash.now[:notice] = notice }
+      format.html { redirect_to briefs_path, notice: notice }
     end
   end
 

@@ -2,4 +2,4 @@
   <%= render "briefs/list", briefs: @briefs %>
 <% end %>
 <%= turbo_stream.update "new_brief", "" %>
-<%= turbo_stream.update "flash", partial: "shared/flash", locals: { notice: "Brief added." } %>
+<%= turbo_stream.update "flash", partial: "shared/flash", locals: { notice: flash[:notice] } %>
