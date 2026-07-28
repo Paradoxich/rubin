@@ -1045,7 +1045,7 @@
     width: 0.375rem;
     height: 0.375rem;
     border-radius: var(--radius-full);
-    background: var(--color-text-primary);
+    background: var(--color-accent-70);
     display: none;
   }
 
