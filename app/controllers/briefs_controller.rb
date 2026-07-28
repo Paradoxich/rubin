@@ -1,9 +1,13 @@
 class BriefsController < ApplicationController
+  DEFAULT_LIMIT = 5
+
   before_action :set_brief, only: %i[show edit update destroy]
 
   def index
     @status = params[:status]
-    @briefs = Brief.with_status(@status).newest_first
+    briefs = Brief.with_status(@status).newest_first
+    @total = briefs.count
+    @briefs = params[:all].present? ? briefs : briefs.limit(DEFAULT_LIMIT)
   end
 
   def show
@@ -23,7 +27,9 @@ class BriefsController < ApplicationController
     @status = filter_status
 
     if @brief.save
-      @briefs = Brief.with_status(@status).newest_first
+      briefs = Brief.with_status(@status).newest_first
+      @total = briefs.count
+      @briefs = briefs.limit(DEFAULT_LIMIT)
       notice = "Brief added."
       respond_to do |format|
         format.turbo_stream { flash.now[:notice] = notice }

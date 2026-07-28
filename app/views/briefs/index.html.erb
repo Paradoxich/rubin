@@ -81,7 +81,7 @@
     <%= render "briefs/new_brief_frame" %>
 
     <%= turbo_frame_tag "briefs", class: "brief-list" do %>
-      <%= render "briefs/list", briefs: @briefs, filter_status: @status %>
+      <%= render "briefs/list", briefs: @briefs, filter_status: @status, total: @total %>
     <% end %>
   </div>
 </section>

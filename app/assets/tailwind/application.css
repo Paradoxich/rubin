@@ -771,6 +771,29 @@
     display: none;
   }
 
+  .brief-list__more {
+    display: block;
+    padding: var(--space-md);
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    transition: background-color 150ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .brief-list__more:hover {
+    background: var(--color-bg-muted);
+    color: var(--color-text-primary);
+  }
+
+  /* With the footer present, the last row no longer sits on the panel's bottom edge. */
+  .brief-list:has(> .brief-list__more) > turbo-frame:last-of-type .brief-row {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   .brief-row {
     position: relative;
     display: grid;

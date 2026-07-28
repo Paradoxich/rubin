@@ -1,3 +1,8 @@
 <%= render partial: "briefs/brief", collection: briefs, as: :brief,
       locals: { filter_status: local_assigns[:filter_status] } %>
 <p class="empty type-body-sm">No briefs in this lane yet.</p>
+<% if local_assigns[:total].to_i > briefs.size %>
+  <%= link_to "Show all #{total}",
+        briefs_path(status: local_assigns[:filter_status], all: 1),
+        class: "brief-list__more type-body-sm" %>
+<% end %>

@@ -19,6 +19,24 @@ Brief.create!(
       requester: "Ava Ruiz",
       status: "approved",
       body: "Ship the server-rendered form with Turbo Frame validation. Keep Stimulus limited to the toggle group."
+    },
+    {
+      title: "Empty states audit",
+      requester: "Priya Nair",
+      status: "inbox",
+      body: "Every list needs a real empty state, not a blank panel. Sweep the app and note the gaps."
+    },
+    {
+      title: "Onboarding checklist card",
+      requester: "Leo Tanaka",
+      status: "in_review",
+      body: "Progressive checklist on the dashboard. Collapses once completed, never nags."
+    },
+    {
+      title: "Dark theme contrast pass",
+      requester: "Sofia Marino",
+      status: "approved",
+      body: "Chips and secondary text sit too close to the card background in warm. Re-check against AA."
     }
   ]
 )
