@@ -8,7 +8,11 @@ class BriefsController < ApplicationController
   end
 
   def show
-    redirect_to edit_brief_path(@brief)
+    if turbo_frame_request?
+      render partial: "briefs/brief", locals: { brief: @brief }
+    else
+      redirect_to briefs_path
+    end
   end
 
   def new

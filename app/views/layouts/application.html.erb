@@ -21,9 +21,8 @@
     <script>
       (() => {
         const saved = localStorage.getItem("rubin-theme")
-        if (saved === "warm" || saved === "cool" || saved === "light") {
-          document.documentElement.dataset.theme = saved
-        }
+        document.documentElement.dataset.theme =
+          saved === "cool" ? "cool" : "warm"
       })()
     </script>
 
@@ -32,6 +31,10 @@
   </head>
 
   <body>
+    <div id="flash" class="toast-region" aria-live="polite">
+      <%= render "shared/flash", notice: flash[:notice] %>
+    </div>
+
     <div class="shell">
       <header class="brand-bar">
         <div>
@@ -40,7 +43,7 @@
         </div>
 
         <div class="theme-switcher" data-controller="theme">
-          <% %w[warm cool light].each do |theme| %>
+          <% %w[warm cool].each do |theme| %>
             <button
               type="button"
               class="theme-switcher__btn<%= theme == "warm" ? " is-active" : "" %>"

@@ -25,9 +25,9 @@ Tokens and type/surface classes come from the portfolio (`app/globals.css` / `do
 
 | Surface | Where |
 |---|---|
-| Turbo Frame inline edit | Click a brief title → edit in-frame with autosave |
+| Turbo Frame inline edit | Click Edit → edit in-frame → Save or Cancel |
 | Turbo Streams | Add / change status / remove briefs without full reload |
-| Stimulus | `dropdown`, `filter`, `autosave`, `flash` in `app/javascript/controllers` |
+| Stimulus | `dropdown`, `filter`, `flash`, `theme` in `app/javascript/controllers` |
 | ViewComponent | `StatusBadgeComponent`, `BriefRowComponent` |
 | Design tokens | Portfolio warm/cool/light tokens in `app/assets/tailwind/application.css` |
 | Theme switcher | `theme_controller.js` + `data-theme` on `<html>` |
@@ -55,6 +55,6 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Suggested practice order
 
 1. Trace a status change: `BriefRowComponent` → `BriefsController#update` → `update.turbo_stream.erb`
-2. Trace inline edit: title link → `edit.html.erb` Turbo Frame → `autosave_controller.js`
+2. Trace inline edit: Edit → `edit.html.erb` Turbo Frame → Save / Cancel
 3. Add one new Stimulus behavior (e.g. character count on notes)
 4. Extract another ViewComponent (e.g. `GhostButtonComponent`) once a pattern repeats

@@ -1,6 +1,6 @@
 <% if notice.present? %>
   <div class="flash" data-controller="flash" role="status">
-    <%= notice %>
+    <span class="flash__message"><%= notice %></span>
     <button type="button" class="flash__close" data-action="flash#dismiss" aria-label="Dismiss">×</button>
   </div>
 <% end %>

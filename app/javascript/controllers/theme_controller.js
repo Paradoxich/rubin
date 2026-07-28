@@ -1,9 +1,9 @@
 import { Controller } from "@hotwired/stimulus"
 
 const STORAGE_KEY = "rubin-theme"
-const THEMES = ["warm", "cool", "light"]
+const THEMES = ["warm", "cool"]
 
-// Mirrors the portfolio's data-theme switching (warm / cool / light).
+// Portfolio dark themes only (warm / cool). Light is parked for now.
 export default class extends Controller {
   static targets = ["button"]
 
